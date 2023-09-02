@@ -17,7 +17,6 @@ function createMarkup (arr) {
 
     }).join('');
 }
-
 function handleGalleryClick (evt) {
     evt.preventDefault();   //блокуєму перехід за посиланням при кліку
     if(evt.target === evt.currentTarget) {
@@ -27,10 +26,7 @@ function handleGalleryClick (evt) {
     const targetElement = evt.target.closest('.js-gallery-item');
     const galleryDesc = targetElement.dataset.preview;
     const galleryInfo = galleryItems.find(gallery => gallery.preview === galleryDesc)
-  
-    
-
-   
+        
 const instance = basicLightbox.create(`
 <div class="modal">
 <img src="${galleryInfo.original}" alt="${galleryInfo.description}"/>
