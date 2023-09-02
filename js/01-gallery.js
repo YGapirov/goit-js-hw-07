@@ -45,6 +45,10 @@ console.log(galleryItems);
 
 // закриття модалки ESC
 
-
+// document.addEventListener("keydown", (evt) => {
+//     if (evt.handleGalleryClick == "Escape") {
+//       closemodal();
+//     }
+//   });
 
 
