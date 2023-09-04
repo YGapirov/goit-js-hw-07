@@ -9,7 +9,7 @@ galleryList.addEventListener('click', handleGalleryClick);
 
 function createMarkup (arr) {
     return arr.map(({preview, original, description }) => {
-        return `<li data-preview="${preview}" class="gallery__item js-gallery-item">
+        return `<li data-preview="${preview}" class="gallery__item">
         <a class="gallery__link" href="${original}">
         <img src="${preview}" data-source="${original}" alt="${description}" class="gallery__image"/>
         </a>
