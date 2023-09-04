@@ -1,11 +1,11 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-const container = document.querySelector('.gallery');
+const galleryList = document.querySelector('.gallery');
 const markup = createMarkup(galleryItems)
-let instance;
-container.insertAdjacentHTML('beforeend', markup);   //виводимо на живу сторінку контейнер
-container.addEventListener('click', handleGalleryClick);
+
+galleryList.insertAdjacentHTML('beforeend', markup);   //виводимо на живу сторінку контейнер
+galleryList.addEventListener('click', handleGalleryClick);
 
 function createMarkup (arr) {
     return arr.map(({preview, original, description }) => {
@@ -19,32 +19,29 @@ function createMarkup (arr) {
 }
 function handleGalleryClick (evt) {
     evt.preventDefault();   //блокуєму перехід за посиланням при кліку
-    if(evt.target === evt.currentTarget) {
+    if(evt.target.nodeName !== 'IMG') {    //перевіряємо клік по зображенню
         return;
     }
 
-    const targetElement = evt.target.closest('.js-gallery-item');
-    const galleryDesc = targetElement.dataset.preview;
-    const galleryInfo = galleryItems.find(gallery => gallery.preview === galleryDesc)
-        
+    const gallerySource = evt.target.dataset.source;
+    const galleryName = evt.target.alt;
+
 const instance = basicLightbox.create(`
 <div class="modal">
-<img src="${galleryInfo.original}" alt="${galleryInfo.description}"/>
+<img src="${gallerySource}" alt="${galleryName}"/>
 </div>
-`);
+`, {
+    onShow: (instance) => {document.addEventListener('keydown', onEscapePress)},  //додали слухача з бібліотеки
+	
+	onClose: (instance) => {document.removeEventListener('keydown', onEscapePress)}  //знімаємо
+});
 
 instance.show();
 
+    function onEscapePress(evt) {
+        if (evt.code === 'Escape') {
+            instance.close();
+        }
+    }
 };
-console.log(galleryItems);
-
-
-// закриття модалки ESC
-
-// document.addEventListener("keydown", (evt) => {
-//     if (evt.handleGalleryClick == "Escape") {
-//       closemodal();
-//     }
-//   });
-
 
