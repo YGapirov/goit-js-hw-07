@@ -4,7 +4,7 @@ const galleryLis = document.querySelector('.gallery');
 const markup = createMarkup(galleryItems)
 
 galleryLis.insertAdjacentHTML('beforeend', markup);   //виводимо на живу сторінку контейнер
-galleryLis.addEventListener('click', handleGalleryClick);
+// galleryLis.addEventListener('click', handleGalleryClick);
 
 function createMarkup (arr) {
     return arr.map(({preview, original, description }) => {
@@ -18,13 +18,13 @@ function createMarkup (arr) {
     
 };
 
-function handleGalleryClick(evt) {
-    evt.preventDefault();   //блокуєму перехід за посиланням при кліку
-    if (evt.target.nodeName !== 'IMG') {    //перевіряємо клік по зображенню
-        return;
-    }
+// function handleGalleryClick(evt) {
+//     evt.preventDefault();   //блокуєму перехід за посиланням при кліку
+//     if (evt.target.nodeName !== 'IMG') {    //перевіряємо клік по зображенню
+//         return;
+//     }
    
-};
+// };
    
     const lightbox = new SimpleLightbox('.gallery a', {
         caption: true,    //показувати підпис під фото
