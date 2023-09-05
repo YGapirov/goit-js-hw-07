@@ -5,7 +5,7 @@ const galleryList = document.querySelector('.gallery');
 const markup = createMarkup(galleryItems)
 
 galleryList.insertAdjacentHTML('beforeend', markup);   //виводимо на живу сторінку контейнер
-galleryList.addEventListener('click', handleGalleryClick);
+galleryList.addEventListener('click', (handleGalleryClick));
 
 function createMarkup (arr) {
     return arr.map(({preview, original, description }) => {
@@ -28,7 +28,7 @@ function handleGalleryClick (evt) {
 
 const instance = basicLightbox.create(`
 <div class="modal">
-<img src="${gallerySource}" alt="${galleryName}"/>
+<img src="${gallerySource}" alt="${galleryName}" id="modalImg"/>
 </div>
 `, {
     onShow: (instance) => {document.addEventListener('keydown', onEscapePress)},  //додали слухача з бібліотеки
@@ -36,8 +36,13 @@ const instance = basicLightbox.create(`
 	onClose: (instance) => {document.removeEventListener('keydown', onEscapePress)}  //знімаємо
 });
 
-instance.show();
-
+    instance.show();
+    
+const modalImg = document.getElementById('modalImg');  //додали слухача до айді для закриття при натисканні на імг
+modalImg.addEventListener('click', () => {
+  instance.close();
+});
+    
     function onEscapePress(evt) {
         if (evt.code === 'Escape') {
             instance.close();
